@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEVICE LOCKED</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Consolas, monospace;
+}
+
+body{
+    background:#000;
+    color:#ff0000;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(
+        circle at center,
+        rgba(255,0,0,0.25),
+        transparent 70%
+    );
+    animation:pulse 2s infinite;
+}
+
+.scanlines{
+    position:fixed;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px
+    );
+    pointer-events:none;
+}
+
+.container{
+    text-align:center;
+    z-index:5;
+    padding:20px;
+}
+
+.lock{
+    font-size:130px;
+    text-shadow:0 0 25px red;
+    animation:shake .15s infinite alternate;
+}
+
+.title{
+    margin-top:10px;
+    font-size:42px;
+    font-weight:bold;
+    color:#ff0000;
+    text-shadow:0 0 20px red;
+}
+
+.subtitle{
+    margin-top:15px;
+    font-size:30px;
+    color:#ff4444;
+    font-weight:bold;
+}
+
+.timer{
+    margin-top:25px;
+    font-size:42px; /* Dibesarin */
+    font-weight:bold;
+    color:white;
+    text-shadow:
+        0 0 10px red,
+        0 0 20px red,
+        0 0 30px red;
+    animation:blink 1s infinite;
+}
+
+.warning{
+    margin-top:35px;
+    font-size:22px;
+    line-height:1.8;
+    color:#ff6666;
+    text-shadow:0 0 8px red;
+}
+
+.footer{
+    margin-top:40px;
+    color:#700000;
+    font-size:12px;
+}
+
+@keyframes pulse{
+    0%{opacity:.4;}
+    50%{opacity:1;}
+    100%{opacity:.4;}
+}
+
+@keyframes shake{
+    from{transform:translateX(-2px);}
+    to{transform:translateX(2px);}
+}
+
+@keyframes blink{
+    0%,100%{opacity:1;}
+    50%{opacity:.5;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scanlines"></div>
+
+<div class="container">
+
+<div class="lock">🔒</div>
+
+<div class="title">
+DEVICE LOCKED BY D4CRASHER TEAM
+</div>
+
+<div class="subtitle">
+HARD LOCK
+</div>
+
+<div class="timer">
+PERMA LOCK BY D4 TEAM
+</div>
+
+<div class="warning">
+ALL DATA IS REMOVED<br><br>
+
+STATUS : HARD LOCKED BATU<br>
+ANDROID : KILLED
+</div>
+
+<div class="footer">
+D4 TEAM SECURITY SYSTEM v2.5
+</div>
+
+</div>
+
+</body>
+</html>
