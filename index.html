@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEVICE LOCKED</title>
+<title>DATA STOLEN</title>
 
 <style>
 *{
@@ -24,16 +24,27 @@ body{
     position:relative;
 }
 
+#matrix{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    opacity:.35;
+}
+
 body::before{
     content:"";
     position:absolute;
     inset:0;
     background:radial-gradient(
         circle at center,
-        rgba(255,0,0,0.25),
+        rgba(255,0,0,.2),
         transparent 70%
     );
     animation:pulse 2s infinite;
+    z-index:1;
 }
 
 .scanlines{
@@ -43,63 +54,72 @@ body::before{
     repeating-linear-gradient(
         to bottom,
         transparent 0px,
-        rgba(255,255,255,0.03) 1px,
+        rgba(255,255,255,.03) 1px,
         transparent 2px
     );
     pointer-events:none;
+    z-index:2;
 }
 
 .container{
     text-align:center;
-    z-index:5;
+    z-index:10;
     padding:20px;
+    max-width:900px;
 }
 
 .lock{
     font-size:130px;
-    text-shadow:0 0 25px red;
+    text-shadow:
+        0 0 10px red,
+        0 0 25px red,
+        0 0 50px red;
     animation:shake .15s infinite alternate;
 }
 
 .title{
     margin-top:10px;
-    font-size:42px;
+    font-size:48px;
     font-weight:bold;
     color:#ff0000;
-    text-shadow:0 0 20px red;
+    text-shadow:
+        0 0 10px red,
+        0 0 25px red,
+        0 0 50px red;
 }
 
 .subtitle{
     margin-top:15px;
-    font-size:30px;
+    font-size:34px;
     color:#ff4444;
     font-weight:bold;
+    letter-spacing:4px;
 }
 
 .timer{
     margin-top:25px;
-    font-size:42px; /* Dibesarin */
+    font-size:48px;
     font-weight:bold;
-    color:white;
+    color:#ffffff;
     text-shadow:
         0 0 10px red,
-        0 0 20px red,
-        0 0 30px red;
+        0 0 25px red,
+        0 0 50px red;
     animation:blink 1s infinite;
 }
 
 .warning{
     margin-top:35px;
-    font-size:22px;
-    line-height:1.8;
+    font-size:24px;
+    line-height:1.9;
     color:#ff6666;
-    text-shadow:0 0 8px red;
+    text-shadow:0 0 10px red;
 }
 
 .footer{
     margin-top:40px;
-    color:#700000;
-    font-size:12px;
+    color:#660000;
+    font-size:13px;
 }
 
 @keyframes pulse{
@@ -115,12 +135,13 @@ body::before{
 
 @keyframes blink{
     0%,100%{opacity:1;}
-    50%{opacity:.5;}
+    50%{opacity:.4;}
 }
 </style>
 </head>
-
 <body>
+
+<canvas id="matrix"></canvas>
 
 <div class="scanlines"></div>
 
@@ -129,29 +150,95 @@ body::before{
 <div class="lock">🔒</div>
 
 <div class="title">
-DEVICE LOCKED BY D4CRASHER TEAM
+DATA STOLEN D4RKZ
 </div>
 
 <div class="subtitle">
-HARD LOCK
+HARD TROJAN
 </div>
 
 <div class="timer">
-PERMA LOCK BY D4 TEAM
+HARD TROJAN PLANTED BY D4 TEAM
 </div>
 
 <div class="warning">
-ALL DATA IS REMOVED<br><br>
-
-STATUS : HARD LOCKED BATU<br>
+ALL DATA IS REMOVED
+<br><br>
+STATUS : HARD TROJAN × LUMMA 911
+<br>
 ANDROID : KILLED
 </div>
 
 <div class="footer">
-D4 TEAM SECURITY SYSTEM v2.5
+D4 TEAM SECURITY SYSTEM v9.6.8
 </div>
 
 </div>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+
+const chars =
+"01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソ";
+
+const fontSize = 16;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = [];
+
+function initDrops(){
+    drops = [];
+    columns = Math.floor(canvas.width / fontSize);
+
+    for(let i=0;i<columns;i++){
+        drops[i] = Math.random() * canvas.height;
+    }
+}
+initDrops();
+
+function draw(){
+
+    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = "#ff0000";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i=0;i<drops.length;i++){
+
+        const text =
+        chars[Math.floor(Math.random()*chars.length)];
+
+        ctx.fillText(
+            text,
+            i * fontSize,
+            drops[i]
+        );
+
+        if(
+            drops[i] > canvas.height &&
+            Math.random() > 0.975
+        ){
+            drops[i] = 0;
+        }
+
+        drops[i] += fontSize;
+    }
+}
+
+setInterval(draw,35);
+
+window.addEventListener("resize",()=>{
+    resize();
+    initDrops();
+});
+</script>
 
 </body>
 </html>
